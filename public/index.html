@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Short Url</title>
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body class="bg-dark">
+
+  <div class="container-fluid centeredBox">
+    <div class="row text-light text-center">
+      <div class="col-sm-4 col-lg-3 mx-auto">
+        <h1 class="heading">Url Shorten</h1>
+        <div id="response"></div>
+        <form id="shortner">
+          <div class="form-group">
+            <input type="url" class="form-control" name="longUrl" id="longUrl" placeholder="Shorten your link" required>
+          </div>
+          <button type="submit" id="submitBtn" class="btn btn-primary btn-block btn-lg">Shorten</button>
+        </form>
+        <a class="text-white float-right text-decoration-none mt-4" href="http://vivekdomadia.engineer/">
+          © Vivek Domadia</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/script.js"></script>
+</body>
+
+</html>

@@ -4,38 +4,34 @@ const shortid = require("shortid");
 const validUrl = require("valid-url");
 const router = new express.Router();
 
-router.get("", (req, res) => {
-  res.send({
-    "": "GET - Docs",
-    "/": "POST - Create short url",
-    "/code": "GET - Redirect to original url",
-  });
-});
+const baseUrl = process.env.BASE_URL;
 
-router.post("", async (req, res) => {
-  const longUrl = req.body.url;
-
+router.post("/createShortLink", async (req, res) => {
+  const longUrl = req.body.longUrl;
   try {
-    if (validUrl.isUri(longUrl)) {
-      const url = await Url.findOne({ longUrl });
-      if (url) {
-        return res.send(url);
-      }
-
-      const code = shortid.generate();
-
-      newUrl = new Url({
-        longUrl,
-        code,
-      });
-
-      await newUrl.save();
-
-      res.status(201).send(newUrl);
+    if (!validUrl.isUri(longUrl)) {
+      return res.status(403).send({ error: "Your url is invalid!" });
     }
-    res.status(404).send({ error: "invalid url!" });
+
+    const url = await Url.findOne({ longUrl });
+    if (url) {
+      return res.send(url);
+    }
+
+    const code = shortid.generate();
+    const shortUrl = baseUrl + code;
+
+    newUrl = new Url({
+      longUrl,
+      code,
+      shortUrl,
+    });
+
+    await newUrl.save();
+
+    res.status(201).send(newUrl);
   } catch (e) {
-    res.status(500).send(e);
+    res.status(500).send({ error: "Something went wrong!" });
   }
 });
 
@@ -45,11 +41,11 @@ router.get("/:code", async (req, res) => {
   try {
     const url = await Url.findOne({ code });
     if (!url) {
-      res.status(404).send({ error: "invalid url!" });
+      return res.status(404).send({ error: "Your url is invilid!" });
     }
     res.redirect(url.longUrl);
   } catch (e) {
-    res.status(500).send(e);
+    res.status(500).send({ error: "Something went wrong!" });
   }
 });
 
