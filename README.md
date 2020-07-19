@@ -2,6 +2,8 @@
 
 A URL Shorter API made with Node.js
 
+[(◔‿◔)!☞ Live Demo](https://tinyurls.ga/)
+
 ### To run this project, do the following:
 
 ##### create .env with the following code (update credentials). Make sure to create .env in the root directory of the project. config/dev.env
