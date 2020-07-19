@@ -4,8 +4,6 @@ const shortid = require("shortid");
 const validUrl = require("valid-url");
 const router = new express.Router();
 
-const baseUrl = process.env.BASE_URL;
-
 router.post("/createShortLink", async (req, res) => {
   const longUrl = req.body.longUrl;
   try {
@@ -19,12 +17,10 @@ router.post("/createShortLink", async (req, res) => {
     }
 
     const code = shortid.generate();
-    const shortUrl = baseUrl + code;
 
     newUrl = new Url({
       longUrl,
       code,
-      shortUrl,
     });
 
     await newUrl.save();
@@ -41,7 +37,7 @@ router.get("/:code", async (req, res) => {
   try {
     const url = await Url.findOne({ code });
     if (!url) {
-      return res.status(404).send({ error: "Your url is invilid!" });
+      return res.redirect("/404.html");
     }
     res.redirect(url.longUrl);
   } catch (e) {
