@@ -1,6 +1,6 @@
-# URL-Shortner-API Node.js
+# URL-Shortner Node.js
 
-A URL Shorter API made with Node.js
+A URL Shorter made with Node.js
 
 [(◔‿◔)!☞ Live Demo](https://tinyurls.ga/)
 
