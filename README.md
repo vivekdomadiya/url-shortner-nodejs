@@ -2,7 +2,7 @@
 
 A URL Shorter made with Node.js
 
-[(◔‿◔)!☞ Live Demo](https://tinyurls.ga/)
+<!-- [(◔‿◔)!☞ Live Demo](https://tinyurls.ga/) -->
 
 
 ##### install all dependency with
